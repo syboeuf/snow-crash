@@ -1,0 +1,44 @@
+Upon running /bin/getflag with gdb, we notice a line saying :
+
+You should not reverse this
+
+Disassembling the main, we see that the getflag binary uses ptrace and exits if eax is < 0 :
+
+0x08048989 <+67>:	call   0x8048540 <ptrace@plt>
+0x0804898e <+72>:	test   %eax,%eax
+0x08048990 <+74>:	jns    0x80489a8 <main+98>
+
+The next step is then to set eax to 0 in order to continue the program :
+
+b main
+b * 0x0804898e
+r
+c
+set $eax=0
+
+The program then uses getuid and compares it's value to the current value in use during the program :
+
+0x08048afd <+439>:	call   0x80484b0 <getuid@plt>
+0x08048b02 <+444>:	mov    %eax,0x18(%esp)
+0x08048b06 <+448>:	mov    0x18(%esp),%eax
+0x08048b0a <+452>:	cmp    $0xbbe,%eax
+
+The final step is then to change the eax value to the flag14 uid value :
+
+First we find the uid of flag14 : 
+
+uid=3014(flag14) gid=3014(flag14) groups=3014(flag14),1001(flag)
+
+Then change it in gdb :
+
+b * 0x08048b0a
+c
+set $eax=3014
+n
+
+Gives us :
+
+Check flag.Here is your token : 7QiHafiNa3HVozsaXkawuYrTstxbpABHD8CPnHJ
+
+This solution works with any uid for any level, in other words, we can get all the flags needed from this level.
+

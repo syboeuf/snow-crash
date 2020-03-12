@@ -1,0 +1,11 @@
+The first step is to gather information about groups and users.
+
+find . -group flag00
+
+We can see a file named john in /usr/sbin.
+
+Upon inspection we find an encrypted string : cdiiddwpgswtgt
+
+After trial and error using different encryption algorithms, we can tell the Cesarian Shift was used with a shifting value of 11.
+
+The decrypted string gives us : nottoohardhere

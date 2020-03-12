@@ -1,0 +1,19 @@
+Running the level13 binary outputs :
+
+UID 2013 started us but we we expect 4242
+
+Inspecting with gdb we notice :
+
+0x0804859a <+14>:    cmp    $0x1092,%eax
+0x0804859f <+19>:    je     0x80485cb <main+63>
+
+The program will continue if eax is equal to 0x1092.
+
+The solution is then to modify eax to 0x1092 :
+
+b main
+b * 0x0804859a
+r
+c
+set $eax=0x1092
+n

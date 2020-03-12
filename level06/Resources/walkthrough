@@ -1,0 +1,7 @@
+There is a deprecated regex modifier used in level06.php.
+
+/e is the equivalent to eval() which allows a string to be executed as php code.
+
+We can then use the system() function to run a binary file within the regex.
+
+echo '[x {${system(getflag)}}]' > /tmp/run_eval

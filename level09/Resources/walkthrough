@@ -1,0 +1,7 @@
+The binary level09 hashes all characters of a string passed as argument in the following form :
+
+Encrypted value of char = ascii value of char + index of char in the string.
+
+From there on, it is easy to reverse the encryption by writing a simple program.
+
+The password for flag09 is : f3iji1ju5yuevaus41q1afiuq

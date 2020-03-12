@@ -1,0 +1,15 @@
+Searching information about pcap files indicates us that this file extension is most often used with wireshark.
+
+After installing wireshark, we copy the pcap file in order to analyse it's traffic.
+
+scp -P 4242 level02@IP:/home/user/level02/level02.pcap .
+
+Upon inspection by doing Follow TCP stream, we notice this line :
+
+Password: ft_wandr...NDRel.L0L
+
+By checking the values in hex format in wireshark, we notice that the non printable characters ('.') correspond to 7f in the ascii table, in this case the DELETE key.
+
+Therefore, we can tell the password for flag02 is :
+
+ft_waNDReL0L

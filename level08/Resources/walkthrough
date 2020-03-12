@@ -1,0 +1,19 @@
+The binary level08 reads a file and outputs it's content on the standard input.
+
+Running the binary on the file named "token" outputs an error : 
+
+You may not access 'token'
+
+Further inspection with gdb shows us that the program calls strstr() and thus, stops if the file provided is named "token" :
+
+0x080485ba <+102>:	call   0x8048400 <strstr@plt>
+
+In order to bypass the strstr() check on the file token, we create a symbolic link :
+
+ln -s /home/user/level08/token /tmp/tok
+
+Running the level08 again on /tmp/tok gives us the password for flag08 :
+
+quif5eloekouj29ke0vouxean
+
+getflag

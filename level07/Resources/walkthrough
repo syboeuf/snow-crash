@@ -1,0 +1,13 @@
+Checking the values in gdb of the level07 binary, we can see that getenv(), asprintf() and system() are used.
+
+The system() function uses this string as a parameter when running the program :
+
+/bin/echo level07
+
+We can safely assume that this value was taken from an environment variable.
+
+Modifying the LOGNAME value and running the program again outputs the new LOGNAME value.
+
+This means we can change the LOGNAME value so that the level07 binary runs a binary file:
+
+export LOGNAME=';getflag'

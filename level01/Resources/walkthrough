@@ -1,0 +1,16 @@
+Upon running /etc/passwd | grep flag01  we find an encrypted password linked to the user flag01 as follows :
+
+flag01:42hDRfypTqqnw:3001:3001::/home/flag/flag01:/bin/bash
+
+We store this information in a file which will then be used with john the ripper :
+
+/etc/passwd | grep flag01 > pass
+
+john -show pass
+
+Gives us :
+
+flag01:abcdefg:3001:3001::/home/flag/flag01:/bin/bash
+
+The password of flag01 is then : abcdefg
+
